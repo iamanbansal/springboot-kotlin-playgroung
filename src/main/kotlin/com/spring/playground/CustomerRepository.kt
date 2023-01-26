@@ -1,6 +1,9 @@
 package com.spring.playground
 
-import com.spring.playground.model.Customer
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
 
-interface CustomerRepository : JpaRepository<Customer, Int>
+interface CustomerRepository : JpaRepository<Customer, Int> {
+    @Query(value = "SELECT * FROM customer ORDER BY age", nativeQuery = true)
+    public fun getCustomerSortByAge(): List<Customer>
+}
